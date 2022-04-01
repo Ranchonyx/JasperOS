@@ -9,8 +9,6 @@
 #include "sys.h"
 #include "pic.h"
 #include "timer.h"
-#include "kheap.h"
-#include "paging.h"
 
 #define CHECK_FLAG(flags,bit)   ((flags) & (1 << (bit)))
 
@@ -93,8 +91,8 @@ void kmain(uint32_t magic, uint32_t mbiaddr, uint32_t kernel_end, uint32_t kerne
 
 
 /*0x100000+(kernel_end-kernel_start)*512*/
-  initialise_kheap(kernel_end+0x1000);
-  initialise_paging(kernel_end+initrd_end, mem_sz);
+  // initialise_kheap(kernel_end+0x1000);
+  // initialise_paging(kernel_end+initrd_end, mem_sz);
 
 
   uint32_t initrd_end        = initrd_end;
@@ -114,7 +112,7 @@ void kmain(uint32_t magic, uint32_t mbiaddr, uint32_t kernel_end, uint32_t kerne
       printf("\n(directory)\n");
     } else {
       printf("\ncontents: ");
-      char *buf = (char*) kmalloc_a(fsnode->length);
+      char *buf = (char*) malloc(fsnode->length);
       uint32_t sz = read_fs(fsnode, 0, fsnode->length, (uint8_t*)buf);
 
       nprintf(buf, sz);

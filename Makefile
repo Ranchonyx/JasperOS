@@ -1,4 +1,4 @@
-OBJECTS = loader.o kmain.o asmfunc.o vga.o ports.o sys.o string.o util.o IDT.o ISR.o exception_handler.o filesystem.o initrd.o pic.o acpi.o timer.o kheap.o paging.o
+OBJECTS = loader.o kmain.o asmfunc.o vga.o ports.o sys.o string.o util.o IDT.o ISR.o exception_handler.o filesystem.o initrd.o pic.o acpi.o timer.o
 CC = gcc
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -ffreestanding -nodefaultlibs -Wall -Wextra -c -Iinclude
 LDFLAGS = -T link.ld -melf_i386 -Ttext=0x100000
